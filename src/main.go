@@ -5,12 +5,13 @@ import (
 	"net/http"
 
 	"github.com/Real-Dev-Squad/reciprocal-backend/src/handlers"
+	"github.com/Real-Dev-Squad/reciprocal-backend/src/middlewares"
 )
 
 func main() {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("GET /users/greet/{name}", handlers.GreetUser)
+	mux.HandleFunc("GET /users/greet/{name}", middlewares.Auth(middlewares.Subscription(handlers.GreetUser)))
 	mux.HandleFunc("POST /users", handlers.CreateUser)
 
 	port := ":8080"
