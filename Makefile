@@ -7,6 +7,14 @@ run:
 	@go run cmd/api/main.go
 
 
+docker-run:
+	@if docker compose up --detach 2>/dev/null; then \
+		: ; \
+	else \
+		echo "Falling back to Docker Compose V1"; \
+		docker-compose up; \
+	fi
+
 # Live Reload
 # ---
 watch:

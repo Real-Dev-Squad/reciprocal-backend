@@ -1,27 +1,33 @@
 package database
 
 import (
-	"database/sql"
+	"context"
 	"fmt"
 	"strconv"
 
 	"github.com/Real-Dev-Squad/reciprocal-backend/src/internal/config"
 	"github.com/Real-Dev-Squad/reciprocal-backend/src/internal/logger"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
+
+type healthResponse struct {
+	Status  string `json:"status"`
+	Message string `json:"message"`
+}
 
 // Service represents a service that interacts with a database.
 type Service interface {
 	// Health returns a map of health status information.
 	// The keys and values in the map are service-specific.
-	Health() map[string]string
+	Health() healthResponse
 
 	// Close terminates the database connection.
 	// It returns an error if the connection cannot be closed.
-	Close() error
+	Close()
 }
 
 type service struct {
-	db *sql.DB
+	dbPool *pgxpool.Pool
 }
 
 var (
@@ -35,27 +41,43 @@ func New() Service {
 
 	connStr := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable", config.DbUsername, config.DbPassword, config.DbHost, strconv.Itoa(config.DbPort), config.Database)
 
-	db, err := sql.Open("postgres", connStr)
+	dbPool, err := pgxpool.New(context.Background(), connStr)
 	if err != nil {
 		logger.Fatal("Error connecting to database: ", err)
 	}
 
-	dbInstance = &service{db: db}
+	dbInstance = &service{dbPool: dbPool}
 
 	return dbInstance
 }
 
-func (s *service) Health() map[string]string {
-	return map[string]string{
-		"status": "ok",
+func (s *service) Health() healthResponse {
+	err := s.dbPool.Ping(context.Background())
+
+	res := healthResponse{
+		Status:  "up",
+		Message: "",
 	}
+
+	if err != nil {
+		logger.Error("Error pinging database: ", err)
+
+		res.Status = "down"
+		res.Message = "Unable to connect to database"
+
+		return res
+	}
+
+	stats := s.dbPool.Stat()
+
+	if stats.IdleConns() > 10 {
+		res.Message = "Too many idle connections"
+	}
+
+	return res
 }
 
-/*
-* Closes the database connection.
-* @returns -  nil if successfully closed the connection, error if the connection cannot be closed.
- */
-func (s *service) Close() error {
+func (s *service) Close() {
+	s.dbPool.Close()
 	logger.Info("Disconnected from database: ", config.Database)
-	return s.db.Close()
 }
