@@ -1,8 +1,9 @@
-version: '3.8'
+name: 'reciprocal-backend'
 
 services:
-  psql:
-    image: postgres:latest
+  database:
+    container_name: pg_db
+    image: postgres:16.4
     environment:
       POSTGRES_DB: ${DB_DATABASE}
       POSTGRES_USER: ${DB_USERNAME}
@@ -10,7 +11,7 @@ services:
     ports:
       - "${DB_PORT}:5432"
     volumes:
-      - psql_volume:/var/lib/postgresql/data
+      - pg_volume:/var/lib/postgresql/data
 
 volumes:
-  psql_volume:
+  pg_volume:
