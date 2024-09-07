@@ -15,7 +15,7 @@ func main() {
 	defer cancel()
 
 	// create a database connection pool
-	dbPool := database.Initialize(ctx)
+	dbPool := database.New(ctx)
 	defer dbPool.Close()
 
 	// Create a new server
