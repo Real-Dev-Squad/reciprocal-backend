@@ -56,7 +56,7 @@ func (s *service) Health() healthResponse {
 
 	res := healthResponse{
 		Status:  "up",
-		Message: "",
+		Message: "All systems operational!",
 	}
 
 	if err != nil {

@@ -9,6 +9,7 @@ import (
 func (s *Server) RegisterRoutes() *http.ServeMux {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("GET /health", health.HealthCheck)
+	health.HealthRouteGroup(mux, s.db)
+
 	return mux
 }
