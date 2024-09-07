@@ -10,25 +10,23 @@ import (
 )
 
 type Config struct {
-	Port                 int    `validate:"required"`
-	AppEnv               string `validate:"appEnv"`
-	DbHost               string `validate:"required"`
-	DbPort               int    `validate:"required"`
-	Database             string `validate:"required"`
-	DbUsername           string `validate:"required"`
-	DbPassword           string `validate:"required"`
-	DbMaxOpenConnections int    `validate:"required,min=10"`
+	Port       int    `validate:"required"`
+	AppEnv     string `validate:"appEnv"`
+	DbHost     string `validate:"required"`
+	DbPort     int    `validate:"required"`
+	Database   string `validate:"required"`
+	DbUsername string `validate:"required"`
+	DbPassword string `validate:"required"`
 }
 
 var (
-	Port                 int
-	AppEnv               string // prod | staging | dev
-	DbHost               string
-	DbPort               int
-	Database             string
-	DbUsername           string
-	DbPassword           string
-	DbMaxOpenConnections int
+	Port       int
+	AppEnv     string // prod | staging | dev
+	DbHost     string
+	DbPort     int
+	Database   string
+	DbUsername string
+	DbPassword string
 )
 
 /*
@@ -85,14 +83,13 @@ func init() {
 	loadEnv()
 
 	config := Config{
-		Port:                 convertToInt(os.Getenv("PORT")),
-		AppEnv:               os.Getenv("APP_ENV"),
-		DbHost:               os.Getenv("DB_HOST"),
-		DbPort:               convertToInt(os.Getenv("DB_PORT")),
-		Database:             os.Getenv("DB_DATABASE"),
-		DbUsername:           os.Getenv("DB_USERNAME"),
-		DbPassword:           os.Getenv("DB_PASSWORD"),
-		DbMaxOpenConnections: convertToInt(os.Getenv("DB_MAX_OPEN_CONNECTIONS")),
+		Port:       convertToInt(os.Getenv("PORT")),
+		AppEnv:     os.Getenv("APP_ENV"),
+		DbHost:     os.Getenv("DB_HOST"),
+		DbPort:     convertToInt(os.Getenv("DB_PORT")),
+		Database:   os.Getenv("DB_DATABASE"),
+		DbUsername: os.Getenv("DB_USERNAME"),
+		DbPassword: os.Getenv("DB_PASSWORD"),
 	}
 
 	validate := validator.New()
@@ -116,5 +113,4 @@ func init() {
 	DbUsername = config.DbUsername
 	DbPassword = config.DbPassword
 	DbHost = config.DbHost
-	DbMaxOpenConnections = config.DbMaxOpenConnections
 }
