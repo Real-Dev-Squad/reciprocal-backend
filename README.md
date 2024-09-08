@@ -7,19 +7,21 @@ This is the backend for the Reciprocal project. It is a Go application built usi
 
 2. Install [Docker desktop](https://www.docker.com/products/docker-desktop/), make sure you have [compose V2.*](https://docs.docker.com/compose/migrate/), available when you install Docker Desktop.
 
-3. Install Packages
+3. Install [air](https://github.com/air-verse/air?tab=readme-ov-file#installation) to enable hot reloading of the application.
+
+4. Install Packages
 ```bash
 go mod download
 ```
 
-4. Run the setup script to create .env file and setup database, make sure you have docker running and `make` installed.
+5. Run the setup script to create .env file and setup database, make sure you have docker running and `make` installed.
 ```bash
 make setup
 ```
 
-5. Run the application
+6. Run the application
 ```bash
 make watch
 ```
 
-6. You can now access the application at `http://localhost:4000`
+7. You can now access the application at `http://localhost:4000`
