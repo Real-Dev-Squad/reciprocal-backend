@@ -15,11 +15,11 @@ func main() {
 	defer cancel()
 
 	// create a database connection pool
-	dbPool := database.New(ctx)
-	defer dbPool.Close()
+	db := database.New()
+	defer db.Close()
 
 	// Create a new server
-	server := server.NewServer(dbPool)
+	server := server.NewServer(ctx, db)
 	logger.Info("Server running on port", config.Port)
 	if err := server.ListenAndServe(); err != nil {
 		panic(err)
