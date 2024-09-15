@@ -24,8 +24,28 @@ docker-down:
 		exit 1; \
 	fi
 
+# Create migration tables
+migration-init:
+	@go run cmd/bun/main.go db init
+
+# Migrate database
+migrate:
+	@go run cmd/bun/main.go db migrate
+
+# Rollback last migration
+rollback:
+	@go run cmd/bun/main.go db rollback
+
+# Get migration status
+migration-status:
+	@go run cmd/bun/main.go db status
+
+# Create a new migration file
+create-migration:
+	@read -p "Enter migration name: " migration_name; \
+	go run cmd/bun/main.go db create_sql $$migration_name
+
 # Live Reload
-# ---
 watch:
 	@if command -v air > /dev/null; then \
             air; \

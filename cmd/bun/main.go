@@ -66,7 +66,7 @@ func newDBCommand(migrations *migrate.Migrations) *cli.Command {
 						return nil
 					}
 
-					logger.Info("migrated to %s\n", group)
+					logger.Info("migrated to ", group)
 					return nil
 				},
 			},
@@ -89,7 +89,7 @@ func newDBCommand(migrations *migrate.Migrations) *cli.Command {
 						return nil
 					}
 
-					logger.Info("rolled back %s\n", group)
+					logger.Info("rolled back ", group)
 					return nil
 				},
 			},
@@ -153,9 +153,9 @@ func newDBCommand(migrations *migrate.Migrations) *cli.Command {
 						return err
 					}
 
-					logger.Info("migrations: %s\n", ms)
-					logger.Info("unapplied migrations: %s\n", ms.Unapplied())
-					logger.Info("last migration group: %s\n", ms.LastGroup())
+					logger.Info("migrations: ", ms)
+					logger.Info("unapplied migrations: ", ms.Unapplied())
+					logger.Info("last migration group: ", ms.LastGroup())
 
 					return nil
 				},
@@ -179,7 +179,7 @@ func newDBCommand(migrations *migrate.Migrations) *cli.Command {
 						return nil
 					}
 
-					logger.Info("marked as applied %s\n", group)
+					logger.Info("marked as applied ", group)
 					return nil
 				},
 			},
