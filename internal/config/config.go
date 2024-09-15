@@ -4,7 +4,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/Real-Dev-Squad/reciprocal-backend/src/internal/logger"
+	"github.com/Real-Dev-Squad/reciprocal-backend/internal/logger"
 	"github.com/go-playground/validator/v10"
 	"github.com/joho/godotenv"
 )

@@ -1,5 +1,5 @@
 build:
-	@go build -o out/main src/cmd/api/main.go
+	@go build -o out/main cmd/api/main.go
 
 
 # Run the application
