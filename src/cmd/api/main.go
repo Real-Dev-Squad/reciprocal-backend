@@ -14,7 +14,7 @@ func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	// create a database connection pool
+	// create a database connection
 	db := database.New()
 	defer db.Close()
 
