@@ -22,8 +22,8 @@ func (h *health) healthHandler(w http.ResponseWriter, r *http.Request) {
 	err := h.db.PingContext(h.ctx)
 
 	res := healthResponse{
-		Status:  "up",
-		Message: "all systems operational!",
+		Status:  "Up",
+		Message: "All systems operational!",
 	}
 
 	w.Header().Set("Content-Type", "application/json")
