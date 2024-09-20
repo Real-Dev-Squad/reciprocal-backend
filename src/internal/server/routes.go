@@ -1,15 +1,16 @@
 package server
 
 import (
+	"context"
 	"net/http"
 
 	"github.com/Real-Dev-Squad/reciprocal-backend/src/internal/health"
 )
 
-func (s *Server) RegisterRoutes() *http.ServeMux {
+func (s *Server) RegisterRoutes(ctx context.Context) *http.ServeMux {
 	mux := http.NewServeMux()
 
-	health.HealthRouteGroup(mux, s.db)
+	health.HealthRouteGroup(mux, ctx, s.db)
 
 	return mux
 }

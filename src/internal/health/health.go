@@ -1,10 +1,11 @@
 package health
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 
-	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/uptrace/bun"
 )
 
 type healthResponse struct {
@@ -13,15 +14,16 @@ type healthResponse struct {
 }
 
 type health struct {
-	db *pgxpool.Pool
+	db  *bun.DB
+	ctx context.Context
 }
 
 func (h *health) healthHandler(w http.ResponseWriter, r *http.Request) {
-	err := h.db.Ping(r.Context())
+	err := h.db.PingContext(h.ctx)
 
 	res := healthResponse{
-		Status:  "Up",
-		Message: "All systems operational!",
+		Status:  "up",
+		Message: "all systems operational!",
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -53,7 +55,7 @@ func (h *health) healthHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(jsonRes)
 }
 
-func HealthRouteGroup(mux *http.ServeMux, db *pgxpool.Pool) {
-	healthService := &health{db}
+func HealthRouteGroup(mux *http.ServeMux, ctx context.Context, db *bun.DB) {
+	healthService := &health{db, ctx}
 	mux.HandleFunc("GET /health", healthService.healthHandler)
 }

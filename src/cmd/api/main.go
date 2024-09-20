@@ -14,12 +14,12 @@ func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	// create a database connection pool
-	dbPool := database.New(ctx)
-	defer dbPool.Close()
+	// create a database connection
+	db := database.New()
+	defer db.Close()
 
 	// Create a new server
-	server := server.NewServer(dbPool)
+	server := server.NewServer(ctx, db)
 	logger.Info("Server running on port", config.Port)
 	if err := server.ListenAndServe(); err != nil {
 		panic(err)
