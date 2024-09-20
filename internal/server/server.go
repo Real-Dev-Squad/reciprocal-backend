@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Real-Dev-Squad/reciprocal-backend/src/internal/config"
+	"github.com/Real-Dev-Squad/reciprocal-backend/internal/config"
 	"github.com/uptrace/bun"
 )
 

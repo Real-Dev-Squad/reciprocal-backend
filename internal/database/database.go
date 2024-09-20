@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/Real-Dev-Squad/reciprocal-backend/src/internal/config"
+	"github.com/Real-Dev-Squad/reciprocal-backend/internal/config"
 	"github.com/uptrace/bun"
 	"github.com/uptrace/bun/dialect/pgdialect"
 	"github.com/uptrace/bun/driver/pgdriver"

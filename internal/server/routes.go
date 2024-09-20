@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/Real-Dev-Squad/reciprocal-backend/src/internal/health"
+	"github.com/Real-Dev-Squad/reciprocal-backend/internal/health"
 )
 
 func (s *Server) RegisterRoutes(ctx context.Context) *http.ServeMux {

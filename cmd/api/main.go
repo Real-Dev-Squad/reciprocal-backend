@@ -3,10 +3,10 @@ package main
 import (
 	"context"
 
-	"github.com/Real-Dev-Squad/reciprocal-backend/src/internal/config"
-	"github.com/Real-Dev-Squad/reciprocal-backend/src/internal/database"
-	"github.com/Real-Dev-Squad/reciprocal-backend/src/internal/logger"
-	"github.com/Real-Dev-Squad/reciprocal-backend/src/internal/server"
+	"github.com/Real-Dev-Squad/reciprocal-backend/internal/config"
+	"github.com/Real-Dev-Squad/reciprocal-backend/internal/database"
+	"github.com/Real-Dev-Squad/reciprocal-backend/internal/logger"
+	"github.com/Real-Dev-Squad/reciprocal-backend/internal/server"
 )
 
 func main() {
